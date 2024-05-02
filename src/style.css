@@ -1,0 +1,9 @@
+body {
+  background-color: green;
+  color: white;
+}
+
+#buttons {
+  margin: 10px;
+  padding: 10px;
+}
