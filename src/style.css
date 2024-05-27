@@ -1,9 +1,25 @@
+@font-face {
+  font-family: "Inknut_Antiqua";
+  src: url('./Inknut_Antiqua/InknutAntiqua-Regular.ttf');
+}
+
 body {
-  background-color: green;
-  color: white;
+  background-color: #00A337;
+  color: #FFFFFF;
+  font-family: 'Inknut_Antiqua';
 }
 
 #buttons {
   margin: 10px;
   padding: 10px;
+  margin-left: 0px;
+}
+
+button {
+  font-family: inherit;
+  border-radius: 5px;
+  border: none;
+  padding: 3px 9px;
+  margin: 3px;
+  margin-left: 0px;
 }

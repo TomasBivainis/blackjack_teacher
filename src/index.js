@@ -1,75 +1,17 @@
 import './style.css';
+import { clearDeck, turnCardsIntoString, getCardScore, playingCards, moves, moveEval } from './module';
 
 const divDealerCards = document.querySelector("#dealer_cards");
 const divPlayerCards = document.querySelector("#player_cards");
 const btnHit = document.querySelector("#hit");
 const btnStand = document.querySelector("#stand");
 const btnSplit = document.querySelector("#split");
+const btnDoubleDown = document.querySelector('#double_down')
 
 const doubleAllowed = false;
 const DASOffered = false;
 
-const playingCards = [
-  "H2",
-  "H3",
-  "H4",
-  "H5",
-  "H6",
-  "H7",
-  "H8",
-  "H9",
-  "H10",
-  "HJ",
-  "HQ",
-  "HK",
-  "HA",
-  "D2",
-  "D3",
-  "D4",
-  "D5",
-  "D6",
-  "D7",
-  "D8",
-  "D9",
-  "D10",
-  "DJ",
-  "DQ",
-  "DK",
-  "DA",
-  "C2",
-  "C3",
-  "C4",
-  "C5",
-  "C6",
-  "C7",
-  "C8",
-  "C9",
-  "C10",
-  "CJ",
-  "CQ",
-  "CK",
-  "CA",
-  "S2",
-  "S3",
-  "S4",
-  "S5",
-  "S6",
-  "S7",
-  "S8",
-  "S9",
-  "S10",
-  "SJ",
-  "SQ",
-  "SK",
-  "SA"
-]
-
-const moves = {
-  hit: "Hit",
-  stand: "Stand",
-  split: "Split",
-  doubleDown: "DoubleDown"
-};
+let currentDeck = playingCards;
 
 let dealerCards = [];
 let playerCards = [];
@@ -77,10 +19,11 @@ let playerCards = [];
 btnHit.addEventListener('click', () => btnClick(moves.hit));
 btnStand.addEventListener('click', () => btnClick(moves.stand));
 btnSplit.addEventListener('click', () => btnClick(moves.split));
+btnDoubleDown.addEventListener('click', () => btnClick(moves.doubleDown));
 
 function clearCards() {
-  dealerCards = [];
-  playerCards = [];
+  clearDeck(dealerCards);
+  clearDeck(playerCards);
 }
 
 function btnClick(move) {
@@ -89,33 +32,15 @@ function btnClick(move) {
   startRound();
 }
 
-function turnCardsIntoString(cards) {
-  let string = "";
-
-  cards.forEach(card => {
-    string += `${card} `;
-  })
-  
-  return string;
-}
-
 function displayCards() {
   divDealerCards.innerHTML = turnCardsIntoString(dealerCards);
   divPlayerCards.innerHTML = turnCardsIntoString(playerCards);
 }
 
 function giveCard(cards) {
-  let number = Math.floor(Math.random() * playingCards.length);
-  cards.push(playingCards[number]);
-}
-
-function getCardScore(card) {
-  card = card.substring(1);
-
-  if(card === "A") return 11;
-  else if(card === "J" || card === "Q" || card === "K") return 10;
-  
-  return parseInt(card);
+  let number = Math.floor(Math.random() * currentDeck.length);
+  cards.push(currentDeck[number]);
+  currentDeck.splice(number, 1);
 }
 
 function determineBestMove() {
@@ -226,10 +151,26 @@ function checkMove(move) {
   else console.log("bad");
 }
 
+function checkIfPairs() {
+  return getCardScore(playerCards[0]) === getCardScore(playerCards[1]);
+}
+
+function checkButtons() {
+  if(checkIfPairs()) btnSplit.disabled = false;
+  else btnSplit.disabled = true;
+
+  if(doubleAllowed) btnDoubleDown.disabled = false;
+  else btnDoubleDown.disabled = true;
+}
+
 function startRound() {
+  currentDeck = playingCards;
   giveCard(playerCards);
   giveCard(playerCards);
   giveCard(dealerCards);
+
+  checkButtons();
+
   displayCards();
 }
 
