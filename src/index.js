@@ -7,6 +7,9 @@ import {
   moves,
   moveEval,
 } from "./module";
+import list from "./icons/list.svg";
+
+document.querySelector("#list_img").src = list;
 
 const divDealerCards = document.querySelector("#dealer_cards");
 const divPlayerCards = document.querySelector("#player_cards");
@@ -215,5 +218,13 @@ document
 document
   .querySelector("#doubling-allowed")
   .addEventListener("change", updateSettings);
+
+document.querySelector("#trigger").addEventListener("click", () => {
+  console.log("here");
+});
+
+document.querySelector("#trigger").addEventListener("change", () => {
+  document.querySelector(".menu_box").classList.toggle("trigger_checked");
+});
 
 startRound();
