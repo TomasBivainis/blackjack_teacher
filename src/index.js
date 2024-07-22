@@ -203,11 +203,10 @@ function updateSettings() {
   const inputDAS = document.querySelector("#das-allowed");
   const inputDouble = document.querySelector("#doubling-allowed");
 
-  doubleAllowed = inputDouble.value;
-  DASOffered = inputDAS.value;
+  doubleAllowed = inputDouble.checked;
+  DASOffered = inputDAS.checked;
 
-  // why button not update instantly
-  btnDoubleDown.disabled = doubleAllowed;
+  btnDoubleDown.disabled = !doubleAllowed;
 }
 
 document
