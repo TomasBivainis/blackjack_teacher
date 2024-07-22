@@ -4,8 +4,6 @@ This is a website where you can learn the basic strategy of Blackjack by playing
 
 ## Todo:
 
-- Fix enabling the "Double down" button.
-- Fix the sliding menu, so you could not see it when it's closed.
 - Think of a way to show if the right move was chosen.
 - Update the sliding menu design.
 - Maybe add a banner.
