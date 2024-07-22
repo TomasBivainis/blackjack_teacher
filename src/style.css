@@ -1,12 +1,12 @@
 @font-face {
   font-family: "Inknut_Antiqua";
-  src: url('./Inknut_Antiqua/InknutAntiqua-Regular.ttf');
+  src: url("./Inknut_Antiqua/InknutAntiqua-Regular.ttf");
 }
 
 body {
-  background-color: #00A337;
-  color: #FFFFFF;
-  font-family: 'Inknut_Antiqua';
+  background-color: #00a337;
+  color: #ffffff;
+  font-family: "Inknut_Antiqua";
 }
 
 #buttons {
@@ -22,4 +22,34 @@ button {
   padding: 3px 9px;
   margin: 3px;
   margin-left: 0px;
+}
+
+#menu {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+#trigger {
+  position: absolute;
+  right: 20px;
+  z-index: 2;
+  top: 20px;
+}
+
+#menu-box {
+  background-color: rgba(0, 0, 0, 0.2);
+  position: absolute;
+  right: -20vw;
+  top: 0;
+  width: 20vw;
+  height: 100vh;
+  box-sizing: border-box;
+  padding: 20px;
+  padding-top: 50px;
+  transition: right 0.3s ease-in-out;
+}
+
+#trigger:checked ~ #menu-box {
+  right: 0;
 }
