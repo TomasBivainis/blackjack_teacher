@@ -4,5 +4,5 @@ This is a website where you can learn the basic strategy of Blackjack by playing
 
 ## Todo:
 
-- Update the sliding menu design.
+- Update the design.
 - Maybe add a banner.
