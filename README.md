@@ -7,4 +7,3 @@ This is a website where you can learn the basic strategy of Blackjack by playing
 - Think of a way to show if the right move was chosen.
 - Update the sliding menu design.
 - Maybe add a banner.
-- Add card images.

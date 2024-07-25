@@ -62,3 +62,8 @@ button {
 .trigger_checked {
   right: 0;
 }
+
+.card {
+  height: 150px;
+  margin: 10px;
+}

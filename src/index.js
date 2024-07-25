@@ -1,22 +1,14 @@
 import "./style.css";
 import {
-  clearDeck,
   turnCardsIntoString,
   getCardScore,
   playingCards,
   moves,
-  moveEval,
 } from "./module";
 import list from "./icons/list.svg";
+import cardImages from "./cards";
 
 document.querySelector("#list_img").src = list;
-
-const divDealerCards = document.querySelector("#dealer_cards");
-const divPlayerCards = document.querySelector("#player_cards");
-const btnHit = document.querySelector("#hit");
-const btnStand = document.querySelector("#stand");
-const btnSplit = document.querySelector("#split");
-const btnDoubleDown = document.querySelector("#double_down");
 
 let doubleAllowed = false;
 let DASOffered = false;
@@ -25,11 +17,6 @@ let currentDeck;
 
 let dealerCards = [];
 let playerCards = [];
-
-btnHit.addEventListener("click", () => btnClick(moves.hit));
-btnStand.addEventListener("click", () => btnClick(moves.stand));
-btnSplit.addEventListener("click", () => btnClick(moves.split));
-btnDoubleDown.addEventListener("click", () => btnClick(moves.doubleDown));
 
 function clearCards() {
   dealerCards = [];
@@ -43,11 +30,38 @@ function btnClick(move) {
 }
 
 function displayCards() {
+  const divDealerCards = document.querySelector("#dealer_cards");
+  const divPlayerCards = document.querySelector("#player_cards");
+
   divDealerCards.innerHTML = "";
   divPlayerCards.innerHTML = "";
 
-  divDealerCards.innerHTML = turnCardsIntoString(dealerCards);
-  divPlayerCards.innerHTML = turnCardsIntoString(playerCards);
+  {
+    const img = document.createElement("img");
+
+    img.src = cardImages.back;
+    img.classList.add("card");
+
+    divDealerCards.appendChild(img);
+  }
+
+  dealerCards.forEach((card) => {
+    const img = document.createElement("img");
+
+    img.src = cardImages[card];
+    img.classList.add("card");
+
+    divDealerCards.appendChild(img);
+  });
+
+  playerCards.forEach((card) => {
+    const img = document.createElement("img");
+
+    img.src = cardImages[card];
+    img.classList.add("card");
+
+    divPlayerCards.appendChild(img);
+  });
 }
 
 function giveCard(cards) {
@@ -182,27 +196,23 @@ function checkIfPairs() {
   return getCardScore(playerCards[0]) === getCardScore(playerCards[1]);
 }
 
-function checkButtons() {
-  if (checkIfPairs()) btnSplit.disabled = false;
-  else btnSplit.disabled = true;
-
-  if (doubleAllowed) btnDoubleDown.disabled = false;
-  else btnDoubleDown.disabled = true;
-}
-
 function startRound() {
   currentDeck = JSON.parse(JSON.stringify(playingCards));
   giveCard(playerCards);
   giveCard(playerCards);
   giveCard(dealerCards);
 
-  checkButtons();
+  const btnSplit = document.querySelector("#split");
+
+  if (checkIfPairs()) btnSplit.disabled = false;
+  else btnSplit.disabled = true;
 
   displayCards();
 }
 
 function updateSettings() {
-  console.log("lmao");
+  const btnDoubleDown = document.querySelector("#double_down");
+
   const inputDAS = document.querySelector("#das-allowed");
   const inputDouble = document.querySelector("#doubling-allowed");
 
@@ -215,16 +225,26 @@ function updateSettings() {
 document
   .querySelector("#das-allowed")
   .addEventListener("change", updateSettings);
+
 document
   .querySelector("#doubling-allowed")
   .addEventListener("change", updateSettings);
 
-document.querySelector("#trigger").addEventListener("click", () => {
-  console.log("here");
-});
-
 document.querySelector("#trigger").addEventListener("change", () => {
   document.querySelector(".menu_box").classList.toggle("trigger_checked");
 });
+
+document
+  .querySelector("#hit")
+  .addEventListener("click", () => btnClick(moves.hit));
+document
+  .querySelector("#stand")
+  .addEventListener("click", () => btnClick(moves.stand));
+document
+  .querySelector("#split")
+  .addEventListener("click", () => btnClick(moves.split));
+document
+  .querySelector("#double_down")
+  .addEventListener("click", () => btnClick(moves.doubleDown));
 
 startRound();
