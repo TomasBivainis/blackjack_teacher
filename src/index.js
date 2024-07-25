@@ -1,10 +1,5 @@
 import "./style.css";
-import {
-  turnCardsIntoString,
-  getCardScore,
-  playingCards,
-  moves,
-} from "./module";
+import { getCardScore, playingCards, moves } from "./module";
 import list from "./icons/list.svg";
 import cardImages from "./cards";
 
@@ -24,9 +19,27 @@ function clearCards() {
 }
 
 function btnClick(move) {
-  checkMove(move);
-  clearCards();
-  startRound();
+  displayResult(isCorrectMove(move));
+}
+
+function displayResult(isCorrect) {
+  hideResults();
+
+  document.querySelector("#waiting").hidden = true;
+  document.querySelector(".continue").hidden = false;
+
+  if (isCorrect) {
+    document.querySelector("#correct").hidden = false;
+  } else {
+    document.querySelector("#incorrect").hidden = false;
+  }
+}
+
+function hideResults() {
+  document.querySelector(".continue").hidden = true;
+  document.querySelector("#correct").hidden = true;
+  document.querySelector("#incorrect").hidden = true;
+  document.querySelector("#waiting").hidden = false;
 }
 
 function displayCards() {
@@ -187,9 +200,8 @@ function determineBestMove() {
   }
 }
 
-function checkMove(move) {
-  if (move === determineBestMove()) console.log("good");
-  else console.log("bad");
+function isCorrectMove(move) {
+  return move === determineBestMove();
 }
 
 function checkIfPairs() {
@@ -197,6 +209,8 @@ function checkIfPairs() {
 }
 
 function startRound() {
+  clearCards();
+  hideResults();
   currentDeck = JSON.parse(JSON.stringify(playingCards));
   giveCard(playerCards);
   giveCard(playerCards);
@@ -246,5 +260,7 @@ document
 document
   .querySelector("#double_down")
   .addEventListener("click", () => btnClick(moves.doubleDown));
+
+document.querySelector(".continue").addEventListener("click", startRound);
 
 startRound();
