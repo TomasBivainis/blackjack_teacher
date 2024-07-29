@@ -205,7 +205,10 @@ function isCorrectMove(move) {
 }
 
 function checkIfPairs() {
-  return getCardScore(playerCards[0]) === getCardScore(playerCards[1]);
+  if (playerCards[0].length !== playerCards[1].length) return false;
+  if (playerCards[0].length === 3 || playerCards[0][1] === playerCards[1][1])
+    return true;
+  return false;
 }
 
 function startRound() {
