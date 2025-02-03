@@ -1,5 +1,5 @@
 import "./style.css";
-import { moves } from "./module";
+import { moves } from "./globals.js";
 import list from "./icons/list.svg";
 import { getSituation, isCorrectMove, getImageURL } from "./controller";
 
