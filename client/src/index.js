@@ -2,12 +2,11 @@ import "./style.css";
 import { moves } from "./globals.js";
 import list from "./icons/list.svg";
 import { getSituation, isCorrectMove, getImageURL } from "./controller";
+import { flipCardName, hasPairs } from "./utils.js";
 
 document.querySelector("#list_img").src = list;
 
 async function btnClick(playerCards, dealerCards, move) {
-  console.log("here");
-
   const result = await isCorrectMove(
     playerCards,
     dealerCards,
@@ -45,6 +44,7 @@ async function startRound() {
   const btnDoubleDown = document.querySelector("#double_down");
 
   hideResults();
+
   btnHit.removeEventListener("click", () =>
     btnClick(playerCards, dealerCards, moves.hit)
   );
@@ -59,6 +59,8 @@ async function startRound() {
   );
 
   const { playerCards, dealerCards } = await getSituation();
+
+  updateSplitButton(playerCards);
 
   btnHit.addEventListener("click", () =>
     btnClick(playerCards, dealerCards, moves.hit)
@@ -77,10 +79,6 @@ async function startRound() {
   );
 
   displayCards(playerCards, dealerCards);
-}
-
-function flipCardName(name) {
-  return name[name.length - 1] + name[0];
 }
 
 function displayCards(playerCards, dealerCards) {
@@ -116,6 +114,12 @@ function displayCards(playerCards, dealerCards) {
 
     divPlayerCards.appendChild(img);
   });
+}
+
+function updateSplitButton(playerCards) {
+  const splitBtn = document.querySelector("#split");
+
+  splitBtn.disabled = !hasPairs(playerCards);
 }
 
 function updateSettings() {

@@ -13,9 +13,6 @@ async function isCorrectMove(playerCards, dealerCards, settings, move) {
 
   const bestMove = (await respnose.json()).bestMove;
 
-  console.log(move);
-  console.log(bestMove);
-
   return move === bestMove;
 }
 
