@@ -11,12 +11,12 @@ async function isCorrectMove(playerCards, dealerCards, settings, move) {
 
   let respnose = await fetch(request);
 
-  const bestMove = await respnose.json();
+  const bestMove = (await respnose.json()).bestMove;
 
   console.log(move);
   console.log(bestMove);
 
-  return move == bestMove.bestMove;
+  return move === bestMove;
 }
 
 async function getSituation() {

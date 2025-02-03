@@ -6,6 +6,8 @@ import { getSituation, isCorrectMove, getImageURL } from "./controller";
 document.querySelector("#list_img").src = list;
 
 async function btnClick(playerCards, dealerCards, move) {
+  console.log("here");
+
   const result = await isCorrectMove(
     playerCards,
     dealerCards,
@@ -37,30 +39,42 @@ function hideResults() {
 }
 
 async function startRound() {
+  const btnHit = document.querySelector("#hit");
+  const btnStand = document.querySelector("#stand");
+  const btnSplit = document.querySelector("#split");
+  const btnDoubleDown = document.querySelector("#double_down");
+
   hideResults();
+  btnHit.removeEventListener("click", () =>
+    btnClick(playerCards, dealerCards, moves.hit)
+  );
+  btnStand.removeEventListener("click", () =>
+    btnClick(playerCards, dealerCards, moves.stand)
+  );
+  btnSplit.removeEventListener("click", () =>
+    btnClick(playerCards, dealerCards, moves.split)
+  );
+  btnDoubleDown.removeEventListener("click", () =>
+    btnClick(playerCards, dealerCards, moves.doubleDown)
+  );
 
   const { playerCards, dealerCards } = await getSituation();
 
-  document
-    .querySelector("#hit")
-    .addEventListener("click", () =>
-      btnClick(playerCards, dealerCards, moves.hit)
-    );
-  document
-    .querySelector("#stand")
-    .addEventListener("click", () =>
-      btnClick(playerCards, dealerCards, moves.stand)
-    );
-  document
-    .querySelector("#split")
-    .addEventListener("click", () =>
-      btnClick(playerCards, dealerCards, moves.split)
-    );
-  document
-    .querySelector("#double_down")
-    .addEventListener("click", () =>
-      btnClick(playerCards, dealerCards, moves.doubleDown)
-    );
+  btnHit.addEventListener("click", () =>
+    btnClick(playerCards, dealerCards, moves.hit)
+  );
+
+  btnStand.addEventListener("click", () =>
+    btnClick(playerCards, dealerCards, moves.stand)
+  );
+
+  btnSplit.addEventListener("click", () =>
+    btnClick(playerCards, dealerCards, moves.split)
+  );
+
+  btnDoubleDown.addEventListener("click", () =>
+    btnClick(playerCards, dealerCards, moves.doubleDown)
+  );
 
   displayCards(playerCards, dealerCards);
 }
