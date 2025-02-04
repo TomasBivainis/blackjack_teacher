@@ -6,6 +6,14 @@ import { flipCardName, hasPairs } from "./utils.js";
 
 document.querySelector("#list_img").src = list;
 
+const btnHit = document.querySelector("#hit");
+const btnStand = document.querySelector("#stand");
+const btnSplit = document.querySelector("#split");
+const btnDoubleDown = document.querySelector("#double_down");
+
+let playerCards;
+let dealerCards;
+
 async function btnClick(playerCards, dealerCards, move) {
   const result = await isCorrectMove(
     playerCards,
@@ -38,45 +46,14 @@ function hideResults() {
 }
 
 async function startRound() {
-  const btnHit = document.querySelector("#hit");
-  const btnStand = document.querySelector("#stand");
-  const btnSplit = document.querySelector("#split");
-  const btnDoubleDown = document.querySelector("#double_down");
-
   hideResults();
 
-  btnHit.removeEventListener("click", () =>
-    btnClick(playerCards, dealerCards, moves.hit)
-  );
-  btnStand.removeEventListener("click", () =>
-    btnClick(playerCards, dealerCards, moves.stand)
-  );
-  btnSplit.removeEventListener("click", () =>
-    btnClick(playerCards, dealerCards, moves.split)
-  );
-  btnDoubleDown.removeEventListener("click", () =>
-    btnClick(playerCards, dealerCards, moves.doubleDown)
-  );
+  const situation = await getSituation();
 
-  const { playerCards, dealerCards } = await getSituation();
+  playerCards = situation.playerCards;
+  dealerCards = situation.dealerCards;
 
   updateSplitButton(playerCards);
-
-  btnHit.addEventListener("click", () =>
-    btnClick(playerCards, dealerCards, moves.hit)
-  );
-
-  btnStand.addEventListener("click", () =>
-    btnClick(playerCards, dealerCards, moves.stand)
-  );
-
-  btnSplit.addEventListener("click", () =>
-    btnClick(playerCards, dealerCards, moves.split)
-  );
-
-  btnDoubleDown.addEventListener("click", () =>
-    btnClick(playerCards, dealerCards, moves.doubleDown)
-  );
 
   displayCards(playerCards, dealerCards);
 }
@@ -148,5 +125,21 @@ document.querySelector("#trigger").addEventListener("change", () => {
 });
 
 document.querySelector(".continue").addEventListener("click", startRound);
+
+btnHit.addEventListener("click", () =>
+  btnClick(playerCards, dealerCards, moves.hit)
+);
+
+btnStand.addEventListener("click", () =>
+  btnClick(playerCards, dealerCards, moves.stand)
+);
+
+btnSplit.addEventListener("click", () =>
+  btnClick(playerCards, dealerCards, moves.split)
+);
+
+btnDoubleDown.addEventListener("click", () =>
+  btnClick(playerCards, dealerCards, moves.doubleDown)
+);
 
 startRound();
