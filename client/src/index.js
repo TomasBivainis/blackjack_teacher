@@ -11,9 +11,8 @@ const btnStand = document.querySelector("#stand");
 const btnSplit = document.querySelector("#split");
 const btnDoubleDown = document.querySelector("#double_down");
 
-let playerCards = [];
-let dealerCards = [];
-let score = 0;
+let playerCards;
+let dealerCards;
 
 async function btnClick(playerCards, dealerCards, move) {
   const result = await isCorrectMove(
@@ -23,18 +22,7 @@ async function btnClick(playerCards, dealerCards, move) {
     move
   );
 
-  if (result) score++;
-  else score -= 2;
-
-  updateScore(score);
-
   displayResult(result);
-}
-
-function updateScore(newScore) {
-  const divScore = document.querySelector("#score");
-
-  divScore.innerHTML = `Score: ${newScore}`;
 }
 
 function displayResult(isCorrect) {
