@@ -2,10 +2,15 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Blackjack Teacher</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Inknut+Antiqua:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
+    <header></header>
     <label for="trigger" id="menu">
       <img src="" alt="menu" id="list_img" style="filter: invert(100%)" />
       <input type="checkbox" id="trigger" />
@@ -20,22 +25,10 @@
         <input type="checkbox" id="das-allowed" />
       </div>
     </div>
-    <div class="container">
-      <div class="game">
-        <h2>Dealer cards</h2>
-        <div id="dealer_cards"></div>
-        <h2>Your cards</h2>
-        <div id="player_cards"></div>
-        <div id="buttons">
-          <button class="button" id="hit">Hit</button>
-          <button class="button" id="stand">Stand</button>
-          <button class="button" id="split">Split pairs</button>
-          <button class="button" id="double_down" disabled>Double down</button>
-        </div>
-      </div>
+    <div class="content">
       <div class="results">
         <div id="waiting">
-          <h1>Waiting...</h1>
+          <h1>Pick what to do</h1>
         </div>
         <div id="correct" hidden>
           <h1>Correct!</h1>
@@ -43,8 +36,27 @@
         <div id="incorrect" hidden>
           <h1>Incorrect</h1>
         </div>
+      </div>
+      <div class="container">
+        <div class="game">
+          <h2>Dealer cards</h2>
+          <div id="dealer_cards"></div>
+          <h2>Your cards</h2>
+          <div id="player_cards"></div>
+          <div id="buttons">
+            <button class="button" id="hit">Hit</button>
+            <button class="button" id="stand">Stand</button>
+            <button class="button" id="split">Split pairs</button>
+            <button class="button" id="double_down" disabled>
+              Double down
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="results bottom">
         <button class="continue">Continue</button>
       </div>
     </div>
+    <footer></footer>
   </body>
 </html>

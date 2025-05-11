@@ -3,28 +3,80 @@
   src: url("./Inknut_Antiqua/InknutAntiqua-Regular.ttf");
 }
 
+/* General styles */
 body {
-  background-color: #00a337;
+  background-color: #004d25; /* Darker green for a professional look */
   color: #ffffff;
-  font-family: "Inknut_Antiqua";
+  font-family: "Roboto", sans-serif; /* Modern font for readability */
+  margin: 0;
+  padding: 0;
   overflow-x: hidden;
 }
 
+h1,
+h2 {
+  font-family: "Inknut Antiqua", serif; /* Elegant font for headings */
+  text-align: center;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 20px;
+}
+
+/* Game area */
+#dealer_cards,
+#player_cards {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 10px 0;
+}
+
+.card {
+  height: 120px;
+  margin: 5px;
+  transition: transform 0.2s ease-in-out;
+}
+
+.card:hover {
+  transform: scale(1.1);
+}
+
+/* Buttons */
 #buttons {
-  margin: 10px;
-  padding: 10px;
-  margin-left: 0px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 20px 0;
 }
 
 button {
   font-family: inherit;
+  font-size: 16px;
   border-radius: 5px;
   border: none;
-  padding: 3px 9px;
-  margin: 3px;
-  margin-left: 0px;
+  padding: 10px 20px;
+  background-color: #007b3d;
+  color: #ffffff;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease-in-out;
 }
 
+button:hover {
+  background-color: #005f2d;
+  transform: scale(1.05);
+}
+
+button:disabled {
+  background-color: #555555;
+  cursor: not-allowed;
+}
+
+/* Menu styles */
 #menu {
   position: absolute;
   right: 20px;
@@ -47,35 +99,72 @@ button {
 }
 
 .menu_box {
-  background-color: rgba(0, 0, 0, 0.2);
-  position: absolute;
-  right: -20vw;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #ffffff;
+  position: fixed;
   top: 0;
-  width: 20vw;
-  height: 100vh;
-  box-sizing: border-box;
+  right: -100%;
+  width: 250px;
+  height: 100%;
   padding: 20px;
-  padding-top: 70px;
+  box-sizing: border-box;
   transition: right 0.3s ease-in-out;
+}
+
+.menu_box label {
+  font-size: 18px;
 }
 
 .trigger_checked {
   right: 0;
 }
 
-.card {
-  height: 150px;
-  margin: 10px;
-}
-
-.container {
-  display: flex;
-}
-
+/* Results section */
 .results {
-  flex-grow: 1;
+  text-align: center;
+  margin-top: 20px;
+}
+
+#correct h1 {
+  color: #00ff00;
+}
+
+#incorrect h1 {
+  color: #ff0000;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .menu_box {
+    width: 70%;
+  }
+
+  .card {
+    height: 100px;
+  }
+
+  button {
+    font-size: 14px;
+    padding: 8px 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .card {
+    height: 80px;
+  }
+
+  button {
+    font-size: 12px;
+    padding: 6px 12px;
+  }
+}
+
+.bottom {
+  margin-top: 0;
+}
+
+.content {
   display: flex;
-  align-items: center;
-  justify-content: center;
   flex-direction: column;
 }
