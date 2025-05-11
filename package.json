@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack --config webpack.config.js",
-    "deploy": "gh-pages -d dist"
+    "build": "webpack --config webpack.config.js"
   },
   "repository": {
     "type": "git",
@@ -20,7 +19,6 @@
   "homepage": "https://github.com/TomasBivainis/blackjack_teacher#readme",
   "devDependencies": {
     "css-loader": "^7.1.1",
-    "gh-pages": "^6.3.0",
     "html-webpack-plugin": "^5.6.0",
     "style-loader": "^4.0.0",
     "webpack": "^5.91.0",
