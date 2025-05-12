@@ -30,4 +30,4 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ## Issues
 
-For issues, please open a [GitHub issue](https://github.com/TomasBivainis/visualsort/issues).
+For issues, please open a [GitHub issue](https://github.com/TomasBivainis/blackjack_teacher/issues).
